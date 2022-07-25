@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.lang.Comparable;
-import java.util.PriorityQueue;
 
 // Comparable 인터페이스를 이용하여 간선들을 정렬
 class Edge implements Comparable<Edge> {
@@ -25,14 +24,6 @@ public class kruskal {
     public static int[] parent;
     public static ArrayList<Edge> edgeList;
 
-    public static void union(int x, int y) {
-        x = find(x);
-        y = find(y);
-
-        if (x != y)
-            parent[y] = x;
-    }
-
     // find() 함수로 부모 노드 찾기
     public static int find(int x) {
         if (parent[x] == x) {
@@ -51,6 +42,15 @@ public class kruskal {
         else return false;
     }
 
+    // union() 함수로 두 정점 합치기
+    public static void union(int x, int y) {
+        x = find(x);
+        y = find(y);
+
+        if (x != y)
+            parent[y] = x;
+    }
+
     public static void main(String args[]) {
         edgeList = new ArrayList<Edge>();
         edgeList.add(new Edge(0, 1, 29));
@@ -63,22 +63,22 @@ public class kruskal {
         edgeList.add(new Edge(6, 3, 18));
         edgeList.add(new Edge(6, 4, 25));
 
-        parent = new int[8];
+        parent = new int[7];
         for (int i = 1; i <= 7; i++) {
             parent[i] = i;
         }
 
         Collections.sort(edgeList);
 
-        int sum = 0;
+        int sum = 0; // 가중치 합
         for (int i = 0; i < edgeList.size(); i++) {
             Edge edge = edgeList.get(i);
             if (!isSameParent(edge.v1, edge.v2)) {
-                sum += edge.weight;
+                sum += edge.weight; // sum = sum + edge.weight
                 union(edge.v1, edge.v2);
             }
         }
 
-        System.out.println(edgeList);
+        System.out.println(sum);
     }
 }
