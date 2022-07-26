@@ -20,7 +20,7 @@ class Edge implements Comparable<Edge> {
     }
 }
 
-public class kruskal {
+public class Kruskal {
     public static int[] parent;
     public static ArrayList<Edge> edgeList;
 
@@ -64,7 +64,7 @@ public class kruskal {
         edgeList.add(new Edge(6, 4, 25));
 
         parent = new int[7];
-        for (int i = 1; i <= 7; i++) {
+        for (int i = 1; i <= 6; i++) {
             parent[i] = i;
         }
 
